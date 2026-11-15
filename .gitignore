@@ -1,0 +1,32 @@
+# 忽略系统与缓存文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# 编辑器
+.vscode/
+.idea/
+
+# 本地工具目录（不属于交付内容）
+.workbuddy/
+
+# 模型权重与中间产物（体积大，可按需重跑生成）
+*.pth
+*.pt
+*.onnx
+*.ckpt
+
+# 超大打包件（超出 GitHub 单文件建议体积，原包保留在本地）
+糖果盘点数据集_提交包.zip
+
+# 临时文件
+*.tmp
+~$*
