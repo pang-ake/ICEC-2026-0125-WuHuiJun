@@ -7,7 +7,7 @@
 | 课题 | 核心产出 | 目录 |
 |---|---|---|
 | **课题 08** 多姿态步态加速度特征采集与对比 | 4 份 100 Hz 原始 CSV、5 张分析图、阈值规则与 90.7% 混淆矩阵、[4 张采集实况截图](Task08-Gait-Accelerometer/photos/) | [`Task08-Gait-Accelerometer/`](Task08-Gait-Accelerometer/) |
-| **课题 10** 日常数字任务耗时审计与 AI 批处理实证 | 10 份样本、人工/AI 双份标注表、Prompt 与脚本、人机校验规则 R1–R9 | [`Task10-AI-Batch-Automation/`](Task10-AI-Batch-Automation/) |
+| **课题 10** 日常数字任务耗时审计与 AI 批处理实证 | 10 份样本、人工/AI 双份标注表、Prompt 与脚本、人机校验规则 R1–R9、[现场同框照](Task10-AI-Batch-Automation/photos/) | [`Task10-AI-Batch-Automation/`](Task10-AI-Batch-Automation/) |
 
 ## 目录规范
 
