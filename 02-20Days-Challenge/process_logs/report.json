@@ -1,0 +1,232 @@
+[
+  {
+    "task": "amount_few_vs_many",
+    "n": 175,
+    "n_groups": 18,
+    "classes": [
+      "few",
+      "many"
+    ],
+    "classes_cn": [
+      "少",
+      "多"
+    ],
+    "sample_acc": 0.7148832866479925,
+    "sample_std": 0.17612144505852556,
+    "group_acc": 0.8533333333333333,
+    "group_std": 0.1808621328833405,
+    "folds": [
+      {
+        "sample": 0.7353,
+        "group": 1.0
+      },
+      {
+        "sample": 0.8611,
+        "group": 1.0
+      },
+      {
+        "sample": 0.6471,
+        "group": 0.6
+      },
+      {
+        "sample": 0.4167,
+        "group": 0.6667
+      },
+      {
+        "sample": 0.9143,
+        "group": 1.0
+      }
+    ],
+    "baseline": 0.5085714285714286,
+    "confusion": [
+      [
+        57,
+        29
+      ],
+      [
+        21,
+        68
+      ]
+    ],
+    "clf": "lr"
+  },
+  {
+    "task": "form",
+    "n": 204,
+    "n_groups": 21,
+    "classes": [
+      "linked",
+      "loose",
+      "mixed"
+    ],
+    "classes_cn": [
+      "连体糖",
+      "纯散糖",
+      "混战"
+    ],
+    "sample_acc": 0.7101425706076869,
+    "sample_std": 0.11589850385203283,
+    "group_acc": 0.8766666666666666,
+    "group_std": 0.10413666234542206,
+    "folds": [
+      {
+        "sample": 0.5641,
+        "group": 0.75
+      },
+      {
+        "sample": 0.6923,
+        "group": 0.8
+      },
+      {
+        "sample": 0.641,
+        "group": 0.8333
+      },
+      {
+        "sample": 0.9091,
+        "group": 1.0
+      },
+      {
+        "sample": 0.7442,
+        "group": 1.0
+      }
+    ],
+    "baseline": 0.3480392156862745,
+    "confusion": [
+      [
+        48,
+        0,
+        22
+      ],
+      [
+        0,
+        53,
+        10
+      ],
+      [
+        18,
+        8,
+        45
+      ]
+    ],
+    "clf": "lr"
+  },
+  {
+    "task": "light",
+    "n": 204,
+    "n_groups": 21,
+    "classes": [
+      "bend",
+      "normal",
+      "shadow",
+      "strong"
+    ],
+    "classes_cn": [
+      "弯折",
+      "正常光",
+      "阴影",
+      "强光"
+    ],
+    "sample_acc": 0.5762481704342168,
+    "sample_std": 0.13714487142159515,
+    "group_acc": 0.7833333333333333,
+    "group_std": 0.19436506316151003,
+    "folds": [
+      {
+        "sample": 0.5641,
+        "group": 0.75
+      },
+      {
+        "sample": 0.7179,
+        "group": 1.0
+      },
+      {
+        "sample": 0.3333,
+        "group": 0.5
+      },
+      {
+        "sample": 0.5682,
+        "group": 0.6667
+      },
+      {
+        "sample": 0.6977,
+        "group": 1.0
+      }
+    ],
+    "baseline": 0.3382352941176471,
+    "confusion": [
+      [
+        20,
+        10,
+        0,
+        11
+      ],
+      [
+        14,
+        42,
+        0,
+        13
+      ],
+      [
+        1,
+        0,
+        38,
+        5
+      ],
+      [
+        14,
+        14,
+        4,
+        18
+      ]
+    ],
+    "clf": "lr"
+  },
+  {
+    "task": "amount_loose_only",
+    "n": 34,
+    "n_groups": 4,
+    "classes": [
+      "few",
+      "many"
+    ],
+    "classes_cn": [
+      "少",
+      "多"
+    ],
+    "sample_acc": 0.2647058823529412,
+    "sample_std": 0.4252009498470871,
+    "group_acc": 0.25,
+    "group_std": 0.4330127018922193,
+    "folds": [
+      {
+        "sample": 0.0588,
+        "group": 0.0
+      },
+      {
+        "sample": 0.0,
+        "group": 0.0
+      },
+      {
+        "sample": 0.0,
+        "group": 0.0
+      },
+      {
+        "sample": 1.0,
+        "group": 1.0
+      }
+    ],
+    "baseline": 0.5294117647058824,
+    "confusion": [
+      [
+        0,
+        16
+      ],
+      [
+        16,
+        2
+      ]
+    ],
+    "clf": "lr",
+    "note": "仅纯散糖，排除连体/混战，检验数量本身的可分性"
+  }
+]

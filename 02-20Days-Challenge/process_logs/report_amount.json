@@ -1,0 +1,48 @@
+{
+  "task": "amount",
+  "task_cn": "数量分类（少 vs 多）",
+  "n": 175,
+  "n_groups": 18,
+  "classes": [
+    "few",
+    "many"
+  ],
+  "sample_acc": 0.7310539645431522,
+  "sample_std": 0.16839740592739996,
+  "group_acc": 0.7833333333333333,
+  "group_std": 0.16499158227686112,
+  "folds": [
+    {
+      "sample": 0.5,
+      "group": 0.6
+    },
+    {
+      "sample": 0.896551724137931,
+      "group": 1.0
+    },
+    {
+      "sample": 0.7966101694915254,
+      "group": 0.75
+    }
+  ],
+  "confusion": [
+    [
+      45,
+      41
+    ],
+    [
+      6,
+      83
+    ]
+  ],
+  "args": {
+    "task": "amount",
+    "arch": "mobilenet_v3_small",
+    "folds": 3,
+    "epochs": 12,
+    "lr": 0.0003,
+    "bs": 16,
+    "size": 192,
+    "seed": 42
+  }
+}
