@@ -1,0 +1,10 @@
+# 忽略模型权重（每个约 43 MB，本机训练生成即可，不进版本库）
+models/*.pth
+models/*.pt
+
+# 运行日志（体积无上限，且每台机器都会重新生成）
+process_logs/run.log
+
+# Python 缓存
+__pycache__/
+*.pyc

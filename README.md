@@ -35,7 +35,9 @@ ICEC-2026-0125-WuHuiJun/
 ├── 02-20Days-Challenge/         # 阶段二：工坊开放式项目挑战（8 选 1）
 │   ├── src/                     # 源码
 │   ├── dataset/                 # 自采数据集（204 张 / 12 场景）
-│   ├── process_logs/            # 运行输出日志与指标
+│   ├── photos/                  # 采集现场同框照
+│   ├── run_log_system/          # 连续运行检测日志（逐日 jsonl + 自动汇总）
+│   ├── process_logs/            # 建模阶段的评估指标（混淆矩阵来源）
 │   └── iterations/              # 迭代记录、实验报告、配图
 └── 03-AI-Collaboration/         # 关键 AI 提问与排障对话记录
 ```
@@ -67,7 +69,10 @@ ICEC-2026-0125-WuHuiJun/
 | 考核维度 | 分值 | 在本仓库哪里能查到 |
 |---|---:|---|
 | 阶段一 实地测评 | 20 | `01-Field-Discovery/` 两个课题的 `raw_data/` + 照片 + 报告 |
-| 阶段二 项目挑战 | 60 | `02-20Days-Challenge/` 的 `dataset/` `src/` `process_logs/` `iterations/` |
+| 阶段二 项目挑战 | 60 | `02-20Days-Challenge/` 的 `dataset/` `src/` `run_log_system/` `iterations/` |
+| 　└ ① ≥200 张多光照数据集（含 EXIF） | 20 | `02-20Days-Challenge/dataset/`（204 张 / 12 场景 / 4 光照） |
+| 　└ ② 连续运行检测日志 | 20 | `02-20Days-Challenge/run_log_system/process_logs/`（逐日 JSONL + 汇总） |
+| 　└ ③ 混淆矩阵与改进报告 | 20 | `02-20Days-Challenge/iterations/实验报告.md`（含全部混淆矩阵与配图） |
 | 阶段三 AI 深度面试 | 20 | `03-AI-Collaboration/` 的对话记录 + 各报告里的"局限与失败分析"章节 |
 
 ---
