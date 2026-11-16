@@ -1,0 +1,17 @@
+# 强制 Windows 批处理脚本使用 CRLF 换行。
+# 原因：cmd 解析纯 LF 的 .bat 会错位截断命令（实测报 'orm' 不是内部或外部命令），
+# 任务会显示"执行成功"但一条日志都不写。
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+*.ps1   text eol=crlf
+
+# 其余文本文件统一 LF
+*.py    text eol=lf
+*.md    text eol=lf
+*.jsonl text eol=lf
+*.json  text eol=lf
+
+# 图片按二进制处理，禁止任何换行转换
+*.jpg   binary
+*.jpeg  binary
+*.png   binary
