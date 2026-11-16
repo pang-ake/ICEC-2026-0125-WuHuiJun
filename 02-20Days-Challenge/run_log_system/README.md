@@ -54,14 +54,18 @@ pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 
 ## 2. Windows 定时自动运行
 
-时间：每天 **21:00**，有效期 **2026-11-15 至 2026-11-23**。
+时间：每天 **21:00**，有效期 **2026-11-17 至 2026-11-23**。
+
+> 本机已注册为计划任务 `ICEC_DailyInference`：首次触发 2026-11-17 21:00，每天重复，
+> 11-23 之后自动停止；勾选了「错过则尽快启动」，笔记本关机期间错过的会在下次开机后补跑。
+> 下面的步骤是换一台机器时的重建方法，本机不需要再操作。
 
 ### 方式一：任务计划程序（图形界面）
 
 1. 按 `Win + R`，输入 `taskschd.msc`，回车。
 2. 右侧点「**创建任务**」（不是"创建基本任务"，那样设不了结束日期）。
 3. **常规**选项卡：
-   - 名称填 `糖果盘点_每日检测日志`
+   - 名称填 `ICEC_DailyInference`
    - 选中「不管用户是否登录都要运行」需要管理员权限，简单起见选「**只在用户登录时运行**」
    - 勾选「使用最高权限运行」（可选）
 4. **触发器**选项卡 → 点「新建」：
@@ -89,13 +93,13 @@ pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 以**管理员**身份打开 CMD，执行：
 
 ```bat
-schtasks /create /tn "糖果盘点_每日检测日志" ^
+schtasks /create /tn "ICEC_DailyInference" ^
   /tr "\"D:\school word\实验班\ICEC-2026-0125-WuHuiJun\02-20Days-Challenge\run_log_system\run_daily.bat\"" ^
-  /sc DAILY /st 21:00 /sd 2026-11-15 /ed 2026-11-23 /f
+  /sc DAILY /st 21:00 /sd 2026-11-17 /ed 2026-11-23 /f
 ```
 
-> `/sd` 是开始日期，`/ed` 是结束日期。注册后可用 `schtasks /query /tn "糖果盘点_每日检测日志"` 检查，
-> `schtasks /run /tn "糖果盘点_每日检测日志"` 立即试跑一次。
+> `/sd` 是开始日期，`/ed` 是结束日期。注册后可用 `schtasks /query /tn "ICEC_DailyInference"` 检查，
+> `schtasks /run /tn "ICEC_DailyInference"` 立即试跑一次。
 
 ### run_daily.bat 的内容
 
@@ -104,6 +108,8 @@ schtasks /create /tn "糖果盘点_每日检测日志" ^
 chcp 65001 >nul
 cd /d "%~dp0"
 set "PY=C:\Users\king2\miniconda3\python.exe"
+set "PYTHONIOENCODING=utf-8"
+set "PYTHONUTF8=1"
 
 "%PY%" daily_inference.py --n 30 --task form  >> "process_logs\run.log" 2>&1
 "%PY%" daily_inference.py --n 30 --task light >> "process_logs\run.log" 2>&1
@@ -111,6 +117,11 @@ set "PY=C:\Users\king2\miniconda3\python.exe"
 ```
 
 换机器时只改 `set "PY=..."` 这一行，指向装了 torch 的 python.exe 即可。
+
+> **这个文件必须以 CRLF 换行保存**。用 Linux/macOS 编辑或经 Git 转换后变成纯 LF 时，
+> cmd 解析会错位——表现为 `'orm' 不是内部或外部命令`、`'_inference.py' 不是内部或外部命令`，
+> 命令开头的字符被吃掉，任务显示"成功"但一条日志都不会写。
+> 仓库里已放 `.gitattributes` 约束 `*.bat` 使用 CRLF，克隆后一般不会退化。
 
 ---
 
@@ -149,7 +160,7 @@ is_mismatch = (预测类别 != 目录名标签)
 
 ---
 
-## 4. 四个容易出错的地方，脚本里已经处理
+## 4. 七个容易出错的地方，脚本里已经处理
 
 **① 权重从哪来。** 仓库里没有任何 `.pth`。`daily_inference.py` 发现权重不存在时会现场训练一次
 并保存到 `models/{task}_resnet18.pth`，之后每天直接加载。权重不要提交到 git（见 `.gitignore`）。
@@ -175,6 +186,25 @@ is_mismatch = (预测类别 != 目录名标签)
 审核时无法自证。改为 `timespec="milliseconds"` 后，60 条记录对应 60 个互不相同的时刻
 （实测 2026-11-16 批：`07:46:41.969` ～ `07:47:19.437`，37 秒跑完 60 张）。
 **这一条是自查时发现的，不是评审指出后才改的**，留在这里作为过程记录。
+
+**⑥ `run_daily.bat` 必须是 CRLF 换行。** 最初这个文件是在 Linux 环境下生成的，纯 LF。
+cmd 解析时会把命令开头的字符吃掉，实际报错是：
+
+```
+'orm' 不是内部或外部命令，也不是可运行的程序
+'_inference.py' 不是内部或外部命令，也不是可运行的程序
+```
+
+`--task form` 变成了 `orm`、`daily_inference.py` 变成了 `_inference.py`。
+更麻烦的是**任务计划程序会显示"执行成功"（返回码 0）**，如果不去看 `run.log`，
+根本发现不了每天都白跑。已用 `.gitattributes` 把 `*.bat` 钉死为 CRLF，防止克隆后退化。
+
+**⑦ `run.log` 的编码要显式指定 UTF-8。** 只写 `chcp 65001` 不够——那只改控制台代码页，
+Python 的 stdout 重定向到文件时仍按系统代码页（简体中文下是 GBK）输出，
+结果 `run.log` 是 GBK，而 `2026-11-16.jsonl` 和 `summary.md` 是 UTF-8，
+同一个目录里两套编码，在 GitHub 或 VS Code 里打开就是一片乱码。
+解决方式是加 `set "PYTHONIOENCODING=utf-8"` 和 `set "PYTHONUTF8=1"`，实测改完后
+`run.log` 通过 UTF-8 严格解码校验。
 
 ### 为什么日志准确率看起来比报告的"组级"数字低
 
