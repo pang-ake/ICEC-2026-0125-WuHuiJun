@@ -32,6 +32,16 @@ echo. >> "process_logs\run.log"
 echo ============================================================ >> "process_logs\run.log"
 echo [%time%] START daily inference >> "process_logs\run.log"
 
+rem ---- Skip if today already has a full round (60 rows) ----
+rem There are several triggers per day (12:30 / 18:00 / 21:00).
+rem The first one that runs completes the day, the rest exit here,
+rem so the same day is never sampled twice.
+"%PY%" check_today.py
+if not errorlevel 1 (
+    echo [%time%] SKIP already completed today >> "process_logs\run.log"
+    exit /b 0
+)
+
 rem ---- Task 1: form classification (3 classes) ----
 "%PY%" daily_inference.py --n 30 --task form >> "process_logs\run.log" 2>&1
 

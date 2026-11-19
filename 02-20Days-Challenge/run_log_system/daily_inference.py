@@ -75,7 +75,7 @@ TASK_CN = {
     "amount": L.AMOUNT_CN,  # few / medium / many
 }
 
-# 抽样轮转以这一天为第 0 天，保证 9 天覆盖全部图片
+# 抽样轮转以这一天为第 0 天，7 天（11-15 ~ 11-21）累计 210 张次即可覆盖全部 204 张图片
 ROTATION_START = datetime(2026, 11, 15).date()
 
 

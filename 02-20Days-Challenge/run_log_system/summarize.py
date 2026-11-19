@@ -160,7 +160,7 @@ def build(rows):
     if len(day_stat) < 4:
         first, last = day_stat[0], day_stat[-1]
         out.append("- 目前只有 %d 天的记录（%s ～ %s），**样本天数不足，本节暂不下趋势结论**。"
-                   "按考核周期跑到 11-23（共 9 天）后再看这一节。"
+                   "按计划跑到 11-21（共 7 天）后再看这一节。"
                    % (len(day_stat), first[0].isoformat(), last[0].isoformat()))
         out.append("- 供参考的观察值：平均置信度 %.3f → %.3f（%+.3f）；"
                    "平均推理耗时 %.1f → %.1f ms（%+.1f ms）。"

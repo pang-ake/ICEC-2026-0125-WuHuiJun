@@ -20,7 +20,7 @@
 
 > 第 ② 项的实现方式：`run_log_system/daily_inference.py` 每天对 30 张图跑一次推理，
 > 每张记录「时间戳 / 推理耗时 / 置信度 / 是否误判」，追加写入 `process_logs/YYYY-MM-DD.jsonl`；
-> `summarize.py` 自动汇总成 `summary.md`。日志自 **2026-11-15** 起逐日累积至封仓（11-23）。
+> `summarize.py` 自动汇总成 `summary.md`。日志自 **2026-11-15** 起逐日累积，至 **11-21** 共 7 天。
 
 ## 现场实拍（同框认证）
 
