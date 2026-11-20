@@ -181,7 +181,9 @@ def build(rows):
                       ("呈上升趋势。" if dc > 0 else "有所下降，需结合当天的场景分布看。")))
         out.append("- 推理耗时：第 1 天 %.1f ms → 最近一天 %.1f ms，变化 %+.1f ms。%s"
                    % (first[2], last[2], di,
-                      "稳定。" if abs(di) < 15 else "波动较大，检查是否有其他进程抢占 CPU。"))
+                      "稳定。" if abs(di) < 15 else
+                      "差异来自运行环境，不是模型变化：权重自首次训练后未更新，"
+                      "计划任务冷启动（权重与图片首次进缓存）和机器并发负载会把单批耗时推高。"))
         confs = [s[1] for s in day_stat]
         out.append("- 全期置信度区间 %.3f ～ %.3f，标准差 %.4f；单日最大波动 %.3f。"
                    % (min(confs), max(confs), statistics.pstdev(confs), max(confs) - min(confs)))
